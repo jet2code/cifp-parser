@@ -11,6 +11,10 @@ const airportCode = (process.argv[2] || "").toUpperCase();
 const airportProcedure = (process.argv[3] || "").toUpperCase();
 
 async function getCIFPFolder() {
+  if (!fs.existsSync(path.join(".", "data"))) {
+    fs.mkdirSync(path.join(".", "data"));
+  }
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
