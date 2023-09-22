@@ -1,0 +1,29 @@
+{
+  "name": "cifp-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "approach": "node ./dist/approach.js",
+    "main": "node ./dist/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "inquirer": "^9.2.11",
+    "os": "^0.1.2",
+    "pdfkit": "^0.13.0",
+    "util": "^0.12.5"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^20.5.0",
+    "@types/pdfkit": "^0.12.11",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}

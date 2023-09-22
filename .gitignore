@@ -1,0 +1,6 @@
+node_modules
+data
+dist
+package-lock.json
+src/mainPDF.ts
+src/steepApproaches.ts
