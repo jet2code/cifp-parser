@@ -20,6 +20,12 @@ git clone https://github.com/jet2code/cifp-parser.git
 cd cifp-parser
 ```
 
+Now, switch to the `tauri-app` branch:
+
+```bash
+git checkout tauri-app
+```
+
 ## Installation
 
 Before building the Tauri app, you need to install the necessary npm packages:
