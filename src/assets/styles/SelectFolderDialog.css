@@ -1,0 +1,22 @@
+.selected-path {
+  background-color: #0d77ee;
+  padding: 10px 10px 10px 10px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.selected-path input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.select-folder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}

@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --text: #00020a;
+    --background: #fafbff;
+    --primary: #204cfe;
+    --secondary: #b3c2ff;
+    --accent: #012fe4;
+  }
+  .dark {
+    --text: #f5f7ff;
+    --background: #000105;
+    --primary: #012edf;
+    --secondary: #000f4d;
+    --accent: #1b48fe;
+  }
+}
+
+@layer components {
+  .titlebar {
+    @apply fixed inset-x-0 top-0 z-50 flex h-8 items-center justify-between bg-background;
+  }
+
+  .titlebar-left {
+    @apply flex;
+  }
+
+  .titlebar-title {
+    @apply pointer-events-none text-sm font-medium text-text;
+  }
+
+  .titlebar-controls {
+    @apply flex;
+  }
+
+  .titlebar-controls button,
+  .titlebar button {
+    @apply flex h-8 w-8 items-center justify-center
+        fill-none stroke-text stroke-2
+        transition-colors duration-150 hover:stroke-primary
+        disabled:stroke-gray-500 disabled:hover:bg-transparent;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .btn-primary {
+    @apply inline-block transform self-center rounded-xl bg-primary px-8 py-4 text-xl text-white transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary;
+  }
+
+  .container {
+    @apply m-5 flex flex-col gap-6 rounded-md p-10 text-center shadow-2xl;
+  }
+
+  h1 {
+    @apply text-5xl font-bold text-text;
+  }
+
+  h2 {
+    @apply text-4xl font-bold text-text;
+  }
+
+  p {
+    @apply text-2xl text-text;
+  }
+
+  input {
+    @apply transform self-center border-b-2 bg-transparent px-8 py-4 text-text outline-none transition-all duration-200 ease-in-out focus:border-primary;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2.5 bg-background;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-md bg-primary;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent;
+  }
+}

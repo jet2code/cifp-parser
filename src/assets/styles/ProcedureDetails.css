@@ -1,0 +1,22 @@
+.table-wrapper {
+  max-width: calc(100vw - 4rem);
+  overflow-x: auto;
+}
+
+th.sticky,
+td.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+th.sticky::after,
+td.sticky::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+}

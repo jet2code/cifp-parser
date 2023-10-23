@@ -1,53 +1,12 @@
-export interface InfoTermsType {
-  readonly seqNumber: string;
-  rteType: string;
-  readonly ident: string;
-  readonly transIdent: string;
-  readonly fixIdent: string;
-  readonly icaoCode: string;
-  secCode: string;
-  subCode: string;
-  descCode: string;
-  turnDr: string;
-  readonly RNP: string;
-  pathTerm: string;
-  readonly tdv: string;
-  readonly recdNavaid: string;
-  readonly icaoCode2: string;
-  readonly secCode2: string;
-  readonly subCode2: string;
-  readonly arcRadius: string;
-  readonly theta: string;
-  readonly rho: string;
-  magCourse: string;
-  readonly rteDistHoldTime: string;
-  readonly altDesc: string;
-  alt1: string;
-  alt2: string;
-  readonly transAlt: string;
-  readonly spdLmtDiscriminator: string;
-  spdLimit: string;
-  readonly vertAngle: string;
-  readonly vertScaleFactor: string;
-  readonly ctrFixIdent: string;
-  readonly icaoCode3: string;
-  readonly secCode3: string;
-  readonly subCode3: string;
-  readonly multicd: string;
-  gnssFms: string;
-  rteQual1: string;
-  rteQual2: string;
-}
+import { InfoTermsType } from "../types/navDataTypes";
 
-/**
- *
- * @param info Information to be parsed into an object from the CIFP file.
- */
-export async function defineCIFP(info: any): Promise<typeof infoTerms> {
+export default async function parseProcedure(
+  info: any
+): Promise<typeof infoTerms> {
   const infoTerms: InfoTermsType = {
     seqNumber: info[0],
     rteType: info[1],
-    ident: info[2],
+    procIdent: info[2],
     transIdent: info[3],
     fixIdent: info[4],
     icaoCode: info[5],
@@ -71,7 +30,7 @@ export async function defineCIFP(info: any): Promise<typeof infoTerms> {
     alt1: info[23],
     alt2: info[24],
     transAlt: info[25],
-    spdLmtDiscriminator: info[26],
+    spdLmtDisc: info[26],
     spdLimit: info[27],
     vertAngle: info[28],
     vertScaleFactor: info[29],
@@ -612,20 +571,5 @@ export async function defineCIFP(info: any): Promise<typeof infoTerms> {
     }
   }
 
-  return cleanCIFP(infoTerms);
-}
-
-/**
- * Removes empty or undefined values from the data object.
- * @param data The data object to clean.
- */
-export function cleanCIFP(data: InfoTermsType): InfoTermsType {
-  for (const key in data) {
-    if (!data[key] || !data[key].trim()) {
-      delete data[key];
-    } else if (/^\s*[°ftkts;]+\s*$/.test(data[key])) {
-      delete data[key];
-    }
-  }
-  return data;
+  return infoTerms;
 }
