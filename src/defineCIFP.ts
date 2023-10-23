@@ -1,3 +1,4 @@
+// import { getFixes } from "./EarthFix.js";
 export interface InfoTermsType {
   readonly seqNumber: string;
   rteType: string;
@@ -627,5 +628,8 @@ export function cleanCIFP(data: InfoTermsType): InfoTermsType {
       delete data[key];
     }
   }
+
+  // getFixes(data);
+
   return data;
 }

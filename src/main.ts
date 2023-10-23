@@ -10,7 +10,7 @@ const readFile = util.promisify(fs.readFile);
 const airportCode = (process.argv[2] || "").toUpperCase();
 const airportProcedure = (process.argv[3] || "").toUpperCase();
 
-async function getCIFPFolder() {
+export async function getCIFPFolder() {
   if (!fs.existsSync(path.join(".", "data"))) {
     fs.mkdirSync(path.join(".", "data"));
   }
@@ -24,11 +24,15 @@ async function getCIFPFolder() {
     {
       type: "input",
       name: "cifpPath",
-      message: "Enter the path to the Custom Data CIFP directory (e.g. D:\\X-Plane\\Custom Data\\CIFP):",
+      message:
+        "Enter the path to the Custom Data directory (e.g. D:\\X-Plane\\Custom Data):",
     },
   ]);
 
-  fs.writeFileSync(path.join(".", "data", "cifpPath.txt"), response.cifpPath);
+  fs.promises.writeFile(
+    path.join(".", "data", "cifpPath.txt"),
+    response.cifpPath
+  );
   rl.close();
 }
 
@@ -39,15 +43,21 @@ async function getCIFPFolder() {
  * @param filterFile The file to extract from.
  */
 
-async function extractCIFP(procedure: string, filePath: string, filterFile?: string): Promise<InfoTermsType[]> {
+async function extractCIFP(
+  procedure: string,
+  filePath: string,
+  filterFile?: string
+): Promise<InfoTermsType[]> {
   const files = await fs.promises.readdir(filePath);
   const cifpInfo: InfoTermsType[] = [];
 
   const targetFiles = filterFile ? [`${filterFile}.dat`] : files;
 
   for (const file of targetFiles) {
-    const contents = await readFile(`${filePath}/${file}`, "utf8");
-    const lines = contents.split(os.EOL).map((line) => line.slice(line.indexOf(":") + 1));
+    const contents = await readFile(`${filePath}/CIFP/${file}`, "utf8");
+    const lines = contents
+      .split(os.EOL)
+      .map((line) => line.slice(line.indexOf(":") + 1));
 
     for (const line of lines) {
       const info = line.split(",");
@@ -69,15 +79,20 @@ async function extractCIFP(procedure: string, filePath: string, filterFile?: str
  * @param filePath The path to the CIFP directory.
  * @param airport The airport to extract procedures from.
  */
-async function getAllProcedures(filePath: string, airport: string): Promise<string[]> {
+async function getAllProcedures(
+  filePath: string,
+  airport: string
+): Promise<string[]> {
   const files = await fs.promises.readdir(filePath);
   const proceduresSet = new Set<string>();
 
   const targetFiles = airport ? [`${airport}.dat`] : files;
 
   for (const file of targetFiles) {
-    const contents = await readFile(`${filePath}/${file}`, "utf8");
-    const lines = contents.split(os.EOL).map((line) => line.slice(line.indexOf(":") + 1));
+    const contents = await readFile(`${filePath}/CIFP/${file}`, "utf8");
+    const lines = contents
+      .split(os.EOL)
+      .map((line) => line.slice(line.indexOf(":") + 1));
 
     for (const line of lines) {
       const info = line.split(",");

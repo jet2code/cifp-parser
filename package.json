@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "approach": "node ./dist/approach.js",
-    "main": "node ./dist/main.js"
+    "approach": "node ./dist/steepApproach.js",
+    "main": "node ./dist/main.js",
+    "legs": "node ./dist/commonLegs.js"
   },
   "keywords": [],
   "author": "",
